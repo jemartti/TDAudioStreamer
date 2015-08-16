@@ -69,9 +69,9 @@
     [self.session sendData:[NSKeyedArchiver archivedDataWithRootObject:[info copy]]];
 
     NSArray *peers = [self.session connectedPeers];
-    NSURL* assetURL = [self.song valueForProperty:MPMediaItemPropertyAssetURL];
+    
     NSString *title = [self.song valueForProperty:MPMediaItemPropertyTitle];
-    if (!assetURL) {
+    if ([[self.song valueForProperty:MPMediaItemPropertyIsCloudItem] boolValue]) {
         /*
          * !!!: When MPMediaItemPropertyAssetURL is nil, it typically means the file
          * in question is protected by DRM. (old m4p files)
